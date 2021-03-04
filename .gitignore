@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# data folders
+unise/resources/data
+unise/resources/index
+
+# pycharm folder
+.idea/
+
+
