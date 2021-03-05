@@ -45,7 +45,7 @@ class indexbuilder:
                                 title = file,
                                 path = path+"/"+course+"/"+year+"/"+subject+"/"+file,
                                 content = content,
-                                subject = subject,
+                                subject = subject.replace("_", " "),
                                 year = year,
                                 course = course
                             )

@@ -10,4 +10,4 @@ class UNIse:
         #builder.create(test=True)
 
         mysearcher = searcher()
-        mysearcher.search("analisi", "content", "subject")
+        mysearcher.search("analisi sistemica", "content", "subject")
