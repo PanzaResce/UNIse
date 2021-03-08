@@ -1,32 +1,36 @@
 import whoosh.index as index
 import nltk
 from whoosh import qparser
-from indexbuilder import indexbuilder
+from unise.indexbuilder import IndexBuilder
 from nltk.corpus import wordnet as wn
 
 
 class searcher:
 
     def __init__(self):
-        self.index_dir = indexbuilder.index_dir
+        self.index_dir = IndexBuilder.index_dir
         self.index = index.open_dir(self.index_dir)
 
         self.english_vocab = set(w.lower() for w in nltk.corpus.words.words())
 
-    def search(self, query, *fields):
+    def search(self, query, *fields, sort_term):
+
+        results = list()
 
         expanded_query = self.expand_query(query)
         q = self.parse_query(expanded_query, *fields)
 
-        with self.index.searcher() as s:
-            results = s.search(q)
-            if len(results) == 0:
-                q = self.parse_query(expanded_query, *fields, group="OR")
-                results = s.search(q)
+        print(q)
 
-            print(q)
-            print(len(results))
-            print(results[0:len(results)])
+        with self.index.searcher() as s:
+            out = s.search(q, sortedby=sort_term)
+            if len(out) == 0:
+                q = self.parse_query(expanded_query, *fields, group="OR")
+                out = s.search(q, sortedby=sort_term)
+
+            self.copy(results, out)
+
+        return results
 
     def parse_query(self, query, *fields, group="AND"):
         if group == "OR":
@@ -53,8 +57,9 @@ class searcher:
                     q += "OR " + wn.synset(wn.synsets(w)[0].name()).lemma.names("ita") + "^0.5 "
                 elif w_lang == "ita":
                     q += "OR " + wn.lemmas(w, lang="ita")[0].synset().name().split(".")[0] + "^0.5 "
-            except IndexError as e:
-                # error raised when no synsets or lemmas are found
+            except (IndexError, AttributeError) as e:
+                # Index error raised when no synsets or lemmas are found
+                # AttributeError usually raised when there is no translation between languages
                 print("error: " + type(e).__name__)
 
         return q
@@ -65,3 +70,15 @@ class searcher:
             return "en"
         else:
             return "ita"
+
+    @staticmethod
+    def copy(results, struct):
+
+        for i in range(len(struct)):
+            app = dict()
+            for key in struct[i]:
+                x = key
+                y = struct[i][key]
+                app[x] = y
+
+            results.append(app)

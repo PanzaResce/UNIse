@@ -1,4 +1,4 @@
-#this module build the index by defining the schema and by adding all the documents
+# this module build the index by defining the schema and by adding all the documents
 
 import os, os.path
 from whoosh import index
@@ -7,11 +7,14 @@ from whoosh.fields import *
 import pdfplumber as reader
 
 
-class indexbuilder:
-    index_dir = "./resources/index"           # the directory where the index is stored
+class IndexBuilder:
+    index_dir = "./unise/resources/index"           # the directory where the index is stored
 
-    data_dir = "./resources/data"
-    test_data_dir = "./resources/test_data"
+    data_dir = "/unise/resources/data"
+    test_data_dir = "/unise/resources/test_data"
+
+    def __init__(self):
+        x = os.getcwd()
 
     schema = Schema(
         title=TEXT(stored=True),        # file and document name
