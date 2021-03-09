@@ -42,6 +42,7 @@ $(".search_output").on("click", ".title", function(){
         url : '/visual'
     })
     .done(function(data) {
+        console.log(data)
         console.log("visualized")
     });
 })

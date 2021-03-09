@@ -1,6 +1,7 @@
+import os
 from unise import app
 from unise.searcher import searcher
-from flask import render_template, jsonify, request
+from flask import render_template, jsonify, request, send_from_directory
 import webbrowser
 
 
@@ -30,5 +31,8 @@ def process():
 
 @app.route('/visual', methods=['POST'])
 def visualize_pdf():
+    path = request.form['path']
+    filepath = os.getcwd().replace("\\", "/") + "/unise" + path.replace(".", "", 1)
+    webbrowser.open_new(filepath)
     return ""
 
