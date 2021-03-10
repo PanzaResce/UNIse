@@ -7,11 +7,9 @@ class UNIse:
     @staticmethod
     def run(mode = "batch"):
         print("UNIse running...")
-        builder = IndexBuilder()
+        #builder = IndexBuilder()
         #builder.create(test=True)
 
         mysearcher = searcher()
         res = mysearcher.search("fisica", "content", "subject", "year", sort_term="")
-
-
         print(res)

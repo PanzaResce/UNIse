@@ -14,7 +14,8 @@ $("#search_button").on("click", function(){
     $.ajax({
         data : {
             keyword: $("#keyword").val(),
-            sort: $('input[name="sort"]:checked').val()
+            sort: $('input[name="sort"]:checked').val(),
+            limit: $("#limit").val(),
         },
         type : 'POST',
         url : '/search'

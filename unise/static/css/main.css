@@ -18,6 +18,16 @@ body {
         display: flex;
     }
 
+    .search_input {
+        width: 30vw;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+    #limit{
+        width: 60%;
+    }
+
     .searchTerm {
         width: 100%;
         border: 3px solid #00B4CC;

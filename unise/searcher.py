@@ -13,7 +13,9 @@ class searcher:
 
         self.english_vocab = set(w.lower() for w in nltk.corpus.words.words())
 
-    def search(self, query, *fields, sort_term):
+    def search(self, query, *fields, sort_term, hit_count=10):
+
+        print(query)
 
         results = list()
 
@@ -23,12 +25,12 @@ class searcher:
         print(q)
 
         with self.index.searcher() as s:
-            out = s.search(q, sortedby=sort_term)
+            out = s.search(q, limit=hit_count, sortedby=sort_term)
             if len(out) == 0:
                 q = self.parse_query(expanded_query, *fields, group="OR")
-                out = s.search(q, sortedby=sort_term)
+                out = s.search(q, limit=hit_count, sortedby=sort_term)
 
-            self.copy(results, out)
+            self.copy(results, out, hit_count)
 
         return results
 
@@ -72,9 +74,10 @@ class searcher:
             return "ita"
 
     @staticmethod
-    def copy(results, struct):
-
-        for i in range(len(struct)):
+    def copy(results, struct, hit_count):
+        """ Self defined deep copy """
+        x = len(struct)
+        for i in range(hit_count):
             app = dict()
             for key in struct[i]:
                 x = key

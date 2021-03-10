@@ -10,11 +10,8 @@ import pdfplumber as reader
 class IndexBuilder:
     index_dir = "./unise/resources/index"           # the directory where the index is stored
 
-    data_dir = "/unise/resources/data"
-    test_data_dir = "/unise/resources/test_data"
-
-    def __init__(self):
-        x = os.getcwd()
+    data_dir = "./unise/resources/data"
+    test_data_dir = "./unise/resources/test_data"
 
     schema = Schema(
         title=TEXT(stored=True),        # file and document name
@@ -31,7 +28,7 @@ class IndexBuilder:
 
         ix = index.create_in(self.index_dir, self.schema)       # this command clear the index if it exists
 
-        writer = ix.writer()
+        writer = ix.writer(limitmb=512)
 
         if test:
             path = self.test_data_dir
