@@ -1,61 +1,69 @@
 <html>
     <head>
         <title>UNIse</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #505052;
+            }
+
+            .container {
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+                .container img{
+                    width: 30%;
+                }
+
+                .container div {
+                    padding: 20px;
+                }
+                
+                .container input {
+                    height: 50px;
+                    border: none;
+                    font-size: 14pt;
+                    border-radius: 5px;
+                    padding: 15px;
+                    background-color: #00B4CC;
+                    color: white;
+                }
+                
+                .container input:hover {
+                    cursor: pointer;
+                    background: lightblue;
+                }
+
+            #comm {
+                position: fixed;
+                bottom: 10px;
+                right: 10px;
+                color: #00B4CC;
+                font-size: 12pt;
+            }
+
+        </style>
+
     </head>
 
     <body>
-        <div class="main_container">
-
-            <div class="search_bar">
-
-                <div style="width: 25vw" class="search search_input">
-                    <input id="keyword" type="text" class="searchTerm" placeholder="What are you looking for?">
-                    <input id="limit" type="number" class="searchTerm" placeholder="Enter max hit count (default: 10)">
-                </div>
-
-                <div class="search">
-                    <p style="font-size: 14pt; color: #00B4CC">You can search for general keywords, by subject (analisi, algebra, ...) or by year (1, 2, 3, ...)</p>
-                </div>
-
-
-
-                <div class="search sortby">
-                    <h3 id="sortby">Sort by:</h3>
-                    <label class="container">None
-                        <input type="radio" name="sort" checked value="">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">Subject
-                        <input type="radio" name="sort" value="subject">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">Year
-                        <input type="radio" name="sort" value="year">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">Course
-                        <input type="radio" name="sort" value="course">
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
-
-                <div class="search_button">
-                    <button id="search_button" type="submit">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </div>
-
+        <div class="container">
+            <img src="{{ url_for('static',filename='img/loading.gif') }}">
+            <div>
+                <input id="search" type="button" value="Search" onClick="location.href='/unise'">
+                <input id="create" type="button" value="Create" onClick="location.href='/create'">
             </div>
-
-            <div class="search_output">
-
-            </div>
-
         </div>
 
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        <div id="comm">Made by Marco Panarelli</div>
     </body>
+
 </html>

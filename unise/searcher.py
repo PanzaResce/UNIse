@@ -76,8 +76,8 @@ class searcher:
     @staticmethod
     def copy(results, struct, hit_count):
         """ Self defined deep copy """
-        x = len(struct)
-        for i in range(hit_count):
+        out_len = hit_count if len(struct) > hit_count else len(struct)
+        for i in range(out_len):
             app = dict()
             for key in struct[i]:
                 x = key

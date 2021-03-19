@@ -20,6 +20,16 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/unise')
+def unise():
+    return render_template('unise.html')
+
+
+@app.route('/create')
+def create_page():
+    return render_template('create.html')
+
+
 @app.route('/search', methods=['POST'])
 def process():
     keyword = request.form['keyword']
@@ -38,11 +48,6 @@ def visualize_pdf():
     filepath = os.getcwd().replace("\\", "/") + path.replace(".", "", 1)
     webbrowser.open_new(filepath)
     return filepath
-
-
-@app.route('/create')
-def create_page():
-    return render_template('create.html')
 
 
 @app.route('/build', methods=['POST'])

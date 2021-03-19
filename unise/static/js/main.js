@@ -9,7 +9,21 @@
 */
 
 
+// SEARCH
 $("#search_button").on("click", function(){
+    search();
+});
+
+$(document).on('keypress', function(event) {
+    let keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13') {
+        search();
+    }
+});
+
+function search() {
+    $(".search_output").find("div").remove();
+    $(".search_output img").css("display", " block");
 
     $.ajax({
         data : {
@@ -21,18 +35,20 @@ $("#search_button").on("click", function(){
         url : '/search'
     })
     .done(function(data) {
+        $(".search_output img").css("display", "");
         fill(data);
     });
-
-});
+}
 
 function fill(data){
-    $(".search_output").empty();
+    $(".search_output").find("div").remove();
     for(var i = 0; i<data.length; i++){
         $(".search_output").append("<div class='link'><p class='title'>"+data[i].title+"<br><span class='path'>"+data[i].path+"</span></p>");
     }
+    $("#contatore span").text(data.length);
 }
 
+// OPEN FILE
 $(".search_output").on("click", ".title", function(){
     console.log($(this).children(".path").text());
     $.ajax({

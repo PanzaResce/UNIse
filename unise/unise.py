@@ -10,6 +10,6 @@ class UNIse:
         #builder = IndexBuilder()
         #builder.create(test=True)
 
-        mysearcher = searcher()
-        res = mysearcher.search("fisica", "content", "subject", "year", sort_term="")
-        print(res)
+        #mysearcher = searcher()
+        #res = mysearcher.search("newton", "content", "subject", "year", sort_term="", hit_count=20)
+        #print(res)
