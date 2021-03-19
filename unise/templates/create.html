@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <title>UNIse</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <style>
+            body{
+                margin: 0;
+                padding: 0;
+            }
+
+            .container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+                .container p {
+                    font-size: 16pt;
+                    margin: 0;
+                }
+
+                .container label {
+                    margin: 20px 0;
+                    cursor: pointer;
+                }
+
+            #create {
+                height: 50px;
+                border: none;
+                font-size: 14pt;
+                border-radius: 5px;
+                padding: 15px;
+                background-color: #00B4CC;
+                color: white;
+            }
+
+            #create:hover {
+                background-color: lightblue;
+                cursor: pointer;
+            }
+
+            #load {
+                position: fixed;
+                display: none;
+                width: 100vw;
+                height: 100vh;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background-color: #eee;
+                opacity: 0.8;
+            }
+
+                #load img {
+                    width: 35vw;
+                }
+
+                #load p {
+                    font-size: 22pt;
+                    opacity: 1;
+                }
+
+                #error {
+                    display: none;
+                    color: red;
+                }
+
+        </style>
+    </head>
+
+    <body>
+        <div id="load">
+            <img src="{{ url_for('static',filename='img/loading.gif') }}">
+            <p>The process may take a few minutes, wait while loading</p>
+            <p id="error">There was an error, the index has not been created, reload the page and try again</p>
+        </div>
+
+        <div class="container">
+            <input id="create" type="button" value="Create Index">
+            <label>Test
+              <input id="check" type="checkbox" checked="checked">
+            </label>
+            <p> L'indice verrà creato prendendo i file dalla directory /unise/resources/<span id="dir">test_data</span>/ <br>
+                La directory deve avere la struttura /corso/anno/materia/nomefile.pdf<br>
+                Avviando la creazione verrà eliminato l'indice attuale (se presente)
+            </p>
+        </div>
+    </body>
+
+    <script type="application/javascript">
+        $("#check").on("click", function() {
+            if($("#check").is(':checked'))
+                $("#dir").text("test_data");
+            else
+                $("#dir").text("data");
+        });
+
+        $("#create").on("click", function (){
+
+            $("#load").css("display", " flex");
+
+            $.ajax({
+                data : {
+                    test: $("#dir").text(),
+                },
+                type : 'POST',
+                url : '/build',
+
+            })
+
+            .done(function(data) {
+                console.log(data)
+                if(data == "200") {
+                    $("#load").css("display", " none");
+                } else if (data == "error") {
+                    $("#load img").hide();
+                    $("#load p").hide();
+                    $("#error").show();
+                }
+            });
+        });
+    </script>
+</html>

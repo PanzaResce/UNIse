@@ -1,0 +1,183 @@
+body {
+    background-color: #505052;
+    padding: 0;
+    margin: 0;
+}
+
+.search_bar {
+    background-color: #424246;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+    .search {
+        width: 20vw;
+        position: relative;
+        display: flex;
+    }
+
+        .search p{
+            font-size: 14pt;
+            color: #00B4CC;
+        }
+
+    .search_input {
+        width: 30vw;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+    #limit{
+        width: 60%;
+    }
+
+    .searchTerm {
+        width: 100%;
+        border: 3px solid #00B4CC;
+        padding: 5px;
+        height: 40px;
+        border-radius: 5px;
+        outline: none;
+        color: #00B4CC;
+    }
+
+    .searchButton {
+        width: 40px;
+        height: 40px;
+        border: 1px solid #00B4CC;
+        background: #00B4CC;
+        text-align: center;
+        color: #fff;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        font-size: 20px;
+    }
+
+    .sortby{
+        width: 45vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #00B4CC;
+    }
+
+    /* The container */
+    .container {
+        position: relative;
+        margin-left: 30px;
+        padding-left: 30px;
+        cursor: pointer;
+        font-size: 12pt;
+    }
+
+    /* Hide the browser's default radio button */
+    .container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    /* Create a custom radio button */
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 25px;
+      width: 25px;
+      background-color: #eee;
+      border-radius: 50%;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+      background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+      background-color: #2196F3;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .container input:checked ~ .checkmark:after {
+      display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .container .checkmark:after {
+     	top: 9px;
+    	left: 9px;
+    	width: 8px;
+    	height: 8px;
+    	border-radius: 50%;
+    	background: white;
+    }
+
+    .search_button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        button {
+            padding: 10px;
+            background: #00B4CC;
+            color: white;
+            font-size: 17px;
+            border: 1px solid grey;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: lightblue;
+        }
+
+    .search_output {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 50px;
+        padding-left: 50px;
+    }
+
+        .link {
+            display: flex;
+            flex-direction: column;
+        }
+            .link p {
+                color: #00B4CC;
+            }
+
+            .title {
+                font-size: 16pt;
+                cursor: pointer;
+            }
+
+            .path {
+                font-size: 12pt;
+                padding-left: 20px;
+            }
+
+        .search_output img {
+            display: none;
+            width: 25%;
+            align-self: center;
+        }
+
+    #contatore {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        color: #00B4CC;
+        font-size: 14pt;
+    }
