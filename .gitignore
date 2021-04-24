@@ -132,6 +132,9 @@ dmypy.json
 unise/resources/data/
 unise/resources/test_data/
 
+# index folder
+unise/resources/index/
+
 # pycharm folder
 .idea/
 
